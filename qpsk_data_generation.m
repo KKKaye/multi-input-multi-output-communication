@@ -1,16 +1,21 @@
-function [txStream, rxStream] = qpsk_data_generation(iSnr, nTxRx, nChannels, nBits, channelMatrix)
+function [txStreamSplit, rxStreamSplit] = qpsk_data_generation(iSnr, nTxRx, nChannels, nBits, channelMatrix)
 variance = 1;
 pskNumber = 4;
 bitsPerSymbol = log2(pskNumber);
-nSymbol = nBits / bitsPerSymbol;
-rxStream = zeros(nChannels, 1);
+nSymbols = nBits / bitsPerSymbol;
+rxStreamSplit = cell(nChannels, 1);
 % binary bit sequence
 bitStream = round(rand(1, nBits));
-txStream = reshape(bitStream, bitsPerSymbol, nSymbol);
-% txStream = demultiplexedStream(1, :) + 1i * demultiplexedStream(2, :);
-noise = sqrt(variance / 2) * (randn(1, nSymbol) + 1i * randn(1, nSymbol));
+% bpsk sequence
+demultiplexedStream = reshape(bitStream, bitsPerSymbol, nSymbols);
+txStream = demultiplexedStream(1, :) + 1i * demultiplexedStream(2, :);
+% split data for mimo: dimension is (number of tx) * (symbols per tx), each
+% row correspond to the data handled by an tx antenna
+txStreamSplit = reshape(txStream, nTxRx, nSymbols / nTxRx);
+noise = sqrt(variance / 2) * (randn(1, nSymbols) + 1i * randn(1, nSymbols));
+noiseSplit = reshape(noise, nTxRx, nSymbols / nTxRx);
 for iChannel = 1: nChannels
-    rxStream(iChannel) = sqrt(iSnr / nTxRx) * channelMatrix{iChannel} * txStream + noise;
+    rxStreamSplit{iChannel} = sqrt(iSnr / nTxRx) * channelMatrix{iChannel} * txStreamSplit + noiseSplit;
 end
 end
 

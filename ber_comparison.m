@@ -10,6 +10,6 @@ for iSnrDb = snrDb
     iSnr = 10 .^ (iSnrDb / 10);
     % 2 * 2 mimo system
     channelMatrix = channel_matrix_generation(nTxRx, nChannels);
+    [txStreamSplit, rxStreamSplit] = qpsk_data_generation(iSnr, nTxRx, nChannels, nBits, channelMatrix);
     flag = 1;
-    [txStream, rxStream] = qpsk_data_generation(iSnr, nTxRx, nChannels, nBits, channelMatrix);
 end
