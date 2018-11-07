@@ -10,6 +10,9 @@ for iSnrDb = snrDb
     iSnr = 10 .^ (iSnrDb / 10);
     % 2 * 2 mimo system
     channelMatrix = channel_matrix_generation(nTxRx, nChannels);
-    [txStreamSplit, rxStreamSplit] = qpsk_data_generation(iSnr, nTxRx, nChannels, nBits, channelMatrix);
+    [txStreamSplit, rxStreamSplit, nPairs] = qpsk_data_generation(iSnr, nTxRx, nChannels, nBits, channelMatrix);
+    [berMaximumLikelihood, xMaximumLikelihood] = maximum_likelihood(iSnr, nTxRx, nChannels, nBits, nPairs, channelMatrix, txStreamSplit, rxStreamSplit);
+    [berZeroForcing, xZeroForcing] = zero_forcing(iSnr, nTxRx, nChannels, nBits, channelMatrix, txStreamSplit, rxStreamSplit);
+    [berMinimumMeanSquareError, xMinimumMeanSquareError] = minimum_mean_square_error(iSnr, nTxRx, nChannels, nBits, channelMatrix, txStreamSplit, rxStreamSplit);
     flag = 1;
 end
