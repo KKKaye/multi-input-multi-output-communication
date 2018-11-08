@@ -2,7 +2,7 @@ clear; close all;
 %% Initialization
 snrDb = 0: 5: 35;
 nTxRx = 2;
-nChannels = 3;
+nChannels = 300;
 nBits = 1e6;
 pskNumber = 4;
 for iSnrDb = snrDb
