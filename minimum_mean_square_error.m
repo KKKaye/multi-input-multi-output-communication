@@ -1,4 +1,4 @@
-function [berMinimumMeanSquareError, xMinimumMeanSquareError] = minimum_mean_square_error(iSnr, nTxRx, nChannels, nBits, channelMatrix, txStreamSplit, rxStreamSplit)
+function [berMinimumMeanSquareError] = minimum_mean_square_error(iSnr, nTxRx, nChannels, nBits, channelMatrix, txStreamSplit, rxStreamSplit)
 bitErrorCount = zeros(nChannels, 1);
 xMinimumMeanSquareError = cell(nChannels, 1);
 for iChannel = 1: nChannels
