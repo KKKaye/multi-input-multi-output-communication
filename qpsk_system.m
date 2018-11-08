@@ -13,8 +13,8 @@ txStream = demultiplexedStream(1, :) + 1i * demultiplexedStream(2, :);
 % split data for mimo: dimension is (number of tx) * (symbols per tx), each
 % row correspond to the data handled by an tx antenna
 txStreamSplit = reshape(txStream, nTxRx, nPairs);
-noise = sqrt(variance / 2) * (randn(1, nSymbols) + 1i * randn(1, nSymbols));
-noiseSplit = reshape(noise, nTxRx, nPairs);
+noiseSplit = sqrt(variance / 2) * (randn(nTxRx, nPairs) + 1i * randn(nTxRx, nPairs));
+% noiseSplit = reshape(noise, nTxRx, nPairs);
 for iChannel = 1: nChannels
     rxStreamSplit{iChannel} = sqrt(iSnr / nTxRx) * channelMatrix{iChannel} * txStreamSplit + noiseSplit;
 end

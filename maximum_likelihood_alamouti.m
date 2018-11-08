@@ -1,4 +1,4 @@
-function [berMaximumLikelihood, xMaximumLikelihood] = maximum_likelihood_alamouti(iSnr, nTxRx, nChannels, nBits, nPairs, channelMatrix, txStreamSplit, rxStreamSplit)
+function [berMaximumLikelihood] = maximum_likelihood_alamouti(iSnr, nTxRx, nChannels, nBits, nPairs, channelMatrix, txStreamSplit, rxStreamSplit)
 bitErrorCount = zeros(nChannels, 1);
 xMaximumLikelihood = cell(nChannels, 1);
 % possible symbol set of x for 2 tx antennas

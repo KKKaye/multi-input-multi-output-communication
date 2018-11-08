@@ -1,4 +1,4 @@
-function [berZeroForcing, xZeroForcing] = zero_forcing(iSnr, nTxRx, nChannels, nBits, channelMatrix, txStreamSplit, rxStreamSplit)
+function [berZeroForcing] = zero_forcing(iSnr, nTxRx, nChannels, nBits, channelMatrix, txStreamSplit, rxStreamSplit)
 bitErrorCount = zeros(nChannels, 1);
 xZeroForcing = cell(nChannels, 1);
 for iChannel = 1: nChannels
