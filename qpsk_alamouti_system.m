@@ -1,4 +1,30 @@
-function [txStreamSplit, rxStreamSplit, txStreamSplitAlamouti, rxStreamSplitAlamouti, nPairs] = alamouti_system(iSnr, nTxRx, nChannels, nBits, channelMatrix)
+% Function: 
+%   - generate bit stream
+%   - map to plain QPSK & Alamouti QPSK symbols
+%   - simulate transmission
+%
+% InputArg(s):
+%   - iSnr: current signal-to-noise ratio 
+%   - nTxRx: number of transmitter and receiver antennas
+%   - nChannels: number of channels to simulate
+%   - nBits: number of bits in a stream
+%   - channelMatrix: complex channel realization (holds channel gains)
+%
+% OutputArg(s):
+%   - txStreamSplit: the transmitted symbol streams splitted to tx antennas
+%   - rxStreamSplit: the received symbol streams on rx antennas
+%   - txStreamSplitAlamouti: tx streams on Alamouti coding
+%   - rxStreamSplitAlamouti: rx streams on Alamouti coding
+%   - nPairs: number of symbol pairs
+%
+% Restraints:
+%   - for 2-by-2 MIMO systems only
+%
+% Comments:
+%   - use cells for readability; modify to 3-d matrix for performance
+%
+% Author & Date: Yang (i@snowztail.com) - 12 Nov 18
+function [txStreamSplit, rxStreamSplit, txStreamSplitAlamouti, rxStreamSplitAlamouti, nPairs] = qpsk_alamouti_system(iSnr, nTxRx, nChannels, nBits, channelMatrix)
 variance = 1;
 pskNumber = 4;
 bitsPerSymbol = log2(pskNumber);
