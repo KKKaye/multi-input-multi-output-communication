@@ -13,6 +13,7 @@ for iSnrDb = snrDb
         capacity(snrDbIndex, txRxIndex) = channel_ergotic_capacity(iTxRx, nChannels, iSnr);
     end
 end
+%% Capacity of MIMO systems on different SNR
 figure;
 capacityCurve = plot(snrDb, capacity);
 title('MIMO capacity');
