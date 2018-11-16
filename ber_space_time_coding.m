@@ -1,6 +1,6 @@
 clear; close all;
 %% Initialization
-snrDb = 0: 5: 25;
+snrDb = 0: 2.5: 25;
 nTxRx = 2;
 nChannels = 30;
 nBits = 1e5;
